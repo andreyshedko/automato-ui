@@ -1,0 +1,38 @@
+@import url("https://unpkg.com/css.gg/icons/icons.css");
+@import "variables";
+
+@font-face {
+  font-family: $font-family;
+  src: $google-font;
+  font-display: swap;
+  color: $font-color;
+}
+
+:root {
+  font-size: calc(15px + 0.390625vw);;
+  box-sizing: border-box;
+}
+
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-family: $font-family;
+}
+
+
+/*
+* When adding a button, reset its background, or else it will look different across browsers.
+*/
+button {
+  appearance: none;
+  background: transparent;
+}
