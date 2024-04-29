@@ -1,4 +1,7 @@
 @import url("https://unpkg.com/css.gg/icons/icons.css");
+@import url("../node_modules/bulma/bulma.scss");
+@import url("bulma.scss");
+
 @import "variables";
 
 @font-face {
@@ -9,7 +12,7 @@
 }
 
 :root {
-  font-size: calc(15px + 0.390625vw);;
+  font-size: calc(12px + 0.390625vw);;
   box-sizing: border-box;
 }
 
