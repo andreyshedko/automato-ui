@@ -22,10 +22,12 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "@logto/sveltekit": "^0.2.9",
+    "@auth0/auth0-spa-js": "^2.1.3",
     "bulma": "^1.0.0",
     "eslint": "^9.1.1",
     "eslint-plugin-svelte": "^2.38.0",
+    "fs": "^0.0.1-security",
+    "mkcert": "^3.2.0",
     "svelte-navigator": "^3.2.2"
   }
 }
