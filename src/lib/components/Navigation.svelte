@@ -1,13 +1,16 @@
 <script lang="ts">
-  import {Route} from 'tinro'; 
-    import Cabinet from './Cabinet.svelte';
-    import Home from './Home.svelte';
+  import { Route, Link, Router } from "svelte-navigator";
+  import PrivateRoute from "./PrivateRoute.svelte";
+  import Cabinet from "./Cabinet.svelte";
+  import Login from "./Login.svelte";
+  import Home from "./Home.svelte";
 </script>
 
+<Router>
 <!-- svelte-ignore a11y-missing-attribute -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar" aria-label="main navigation">
   <div class="navbar-brand">
-    <a class="navbar-item" href="https://automato.store">
+    <a class="navbar-item" href="/">
       <img src="./roboto.svg" />
     </a>
 
@@ -27,35 +30,25 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="/"> Home </a>
-
-      <a class="navbar-item"> Documentation </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link"> More </a>
-
-        <div class="navbar-dropdown">
-          <a class="navbar-item"> About </a>
-          <a class="navbar-item is-selected"> Jobs </a>
-          <a class="navbar-item"> Contact </a>
-          <hr class="navbar-divider" />
-          <a class="navbar-item"> Report an issue </a>
-        </div>
-      </div>
     </div>
 
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-light" href="/cabinet"> Log in </a>
+          <Link class="button is-light" to="/login">Log in</Link>
         </div>
       </div>
     </div>
   </div>
 </nav>
 
-<Route path="/"><Home /></Route>
-<Route path="/cabinet"><Cabinet /></Route>
+<Route path="/">
+  <Home/>
+</Route>
+<Route path="login">
+  <Login />
+</Route>
+<PrivateRoute path="cabinet">
+  <Cabinet />
+</PrivateRoute>
+</Router>
