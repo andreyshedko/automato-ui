@@ -1,8 +1,0 @@
-<script lang="ts">
-    import "./app.scss";
-    import Navigation from "../src/lib/components/Navigation.svelte";
-
-    // fetch(`https://dev-i5i4bgmiblqccznu.eu.auth0.com/authorize`).then(v => console.log(v))
-</script>
-
-<Navigation />
