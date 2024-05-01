@@ -21,4 +21,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AUTOMATO_F4596 }}
           channelId: live
           projectId: automato-f4596
-          env: FIREBASE_CLI_EXPERIMENTS
+        env:
+         FIREBASE_CLI_EXPERIMENTS: webframeworks
