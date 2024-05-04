@@ -12,7 +12,7 @@ export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/cabinet": [3],
+		"/dashboard": [3],
 		"/login": [4]
 	};
 
