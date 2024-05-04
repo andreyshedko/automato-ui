@@ -97,6 +97,7 @@ declare module '$env/static/private' {
 	export const npm_package_dependencies_eslint_plugin_svelte: string;
 	export const npm_package_dependencies_firebase: string;
 	export const npm_package_dependencies_fs: string;
+	export const npm_package_dependencies__auth0_auth0_spa_js: string;
 	export const npm_package_description: string;
 	export const npm_package_devDependencies_eslint_config_prettier: string;
 	export const npm_package_devDependencies_prettier: string;
@@ -281,6 +282,7 @@ declare module '$env/dynamic/private' {
 		npm_package_dependencies_eslint_plugin_svelte: string;
 		npm_package_dependencies_firebase: string;
 		npm_package_dependencies_fs: string;
+		npm_package_dependencies__auth0_auth0_spa_js: string;
 		npm_package_description: string;
 		npm_package_devDependencies_eslint_config_prettier: string;
 		npm_package_devDependencies_prettier: string;

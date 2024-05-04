@@ -1,37 +1,24 @@
 <script lang="ts">
 	import '../app.scss';
+	import auth from '$lib/auth0/auth0';
+	import { isAuthenticated, user } from '$lib/stores/user'
 	import { onMount } from 'svelte';
-	import { session } from '$lib/stores/session';
-	import { goto } from '$app/navigation';
-	import type { LayoutData } from './$types';
-	export let data: LayoutData;
 
-	let loading: boolean = true;
-	let loggedIn: boolean = false;
-
-	session.subscribe((cur: any) => {
-		loading = cur?.loading;
-		loggedIn = cur?.loggedIn;
-	});
+	let auth0Client;
 
 	onMount(async () => {
-		const user: any = await data.getAuthUser();
-
-		const loggedIn = !!user && user?.emailVerified;
-		session.update((cur: any) => {
-			loading = false;
-			return {
-				...cur,
-				user,
-				loggedIn,
-				loading: false
-			};
-		});
-
-		if (loggedIn) {
-			goto('/');
-		}
+		auth0Client = await auth.createClient();
+		isAuthenticated.set(await auth0Client.isAuthenticated());
+		user.set(await auth0Client.getUser());
 	});
+
+	function login() {
+		auth.loginWithPopup(auth0Client);
+	}
+
+	function logout() {
+		auth.logout(auth0Client);
+	}
 </script>
 
 <nav class="navbar" aria-label="main navigation">
@@ -68,11 +55,14 @@
 	</div>
 </nav>
 
-{#if loading}
- <div>Loading...</div>
+{#if $isAuthenticated}
+	<h2>Hey {$user.name}!</h2>
+	{#if $user.picture}
+		<img src={$user.picture} alt={user.name} />
+	{:else}
+		<img src="https://source.unsplash.com/random/400x300" alt="Random from unsplash" />
+	{/if}
+	<button on:click={logout}>Logout</button>
 {:else}
-  <div>
-   Logged in: {loggedIn}
-   <slot />
-  </div>
+	<button on:click={login}>Login</button>
 {/if}

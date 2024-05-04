@@ -1,10 +1,6 @@
-import { writable, type Writable } from 'svelte/store';
+import { writable } from 'svelte/store'
 
-export const user = writable(undefined);
-
-export const asyncCheckAuthStatus = async () => {
-    // this could be a call to Amplify currentUserInfo or another async auth library
-      // you could use the response to set user if success
-    // or throw an error if user not found
-    await new Promise(resolve => setTimeout(resolve, 1000));
-  }
+export const isAuthenticated = writable(false)
+export const user = writable({})
+export const popupOpen = writable(false)
+export const error = writable()
