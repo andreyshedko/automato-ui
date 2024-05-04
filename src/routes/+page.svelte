@@ -1,33 +1,45 @@
-<script lang="ts">
+<script>
+    import auth from '$lib/auth0/auth0';
     import { onMount } from 'svelte';
-    import type { LayoutData } from "./$types";
-	import { session } from '$lib/stores/session';
-    export let data: LayoutData;
-
-    let loading: boolean = true;
-    let loggedIn: boolean = false;
-
-    session.subscribe((cur: any) => {
-        loading = cur?.loading;
-        loggedIn = cur?.loggedIn;
-    });
-
+    import { user } from '$lib/stores/user'
+  
+    /**
+	 * @type {{ isAuthenticated: () => any; getUser: () => any; }}
+	 */
+    let auth0Client
+  
     onMount(async () => {
-        const user: any = await data.getAuthUser();
-
-        const loggedIn = !!user && user?.emailVerified;
-        session.update((cur: any) => {
-            loading = false;
-            return {
-                ...cur,
-                user,
-                loggedIn,
-                loading: false,
-            };
-        });
-
-        if (loggedIn) {
-            goto("/");
-        }
-    });
-</script>
+      auth0Client = await auth.createClient()
+      isAuthenticated.set(await auth0Client.isAuthenticated())
+      user.set(await auth0Client.getUser())
+    })
+  
+    function login() {
+      auth.loginWithPopup(auth0Client)
+    }
+  
+    function logout() {
+      auth.logout(auth0Client)
+    }
+  </script>
+  
+  <h1>Welcome to SvelteKit</h1>
+  <p>
+    Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the
+    documentation
+  </p>
+  
+  {#if $isAuthenticated}
+    <h2>Hey {$user.name}!</h2>
+    {#if $user.picture}
+      <img src={$user.picture} alt={user.name} />
+    {:else}
+      <img
+        src="https://source.unsplash.com/random/400x300"
+        alt="Random from unsplash"
+      />
+    {/if}
+    <button on:click={logout}>Logout</button>
+  {:else}
+    <button on:click={login}>Login</button>
+  {/if}

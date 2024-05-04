@@ -1,70 +1,38 @@
 <script lang="ts">
-	import { session } from '$lib/stores/session';
-	import { auth } from '$lib/firebase.client';
-	import {
-		GoogleAuthProvider,
-		signInWithPopup,
-		signInWithEmailAndPassword,
-		type UserCredential
-	} from 'firebase/auth';
-	import { goto } from '$app/navigation';
+ import auth from '$lib/auth0/auth0'
+  import { isAuthenticated, user } from '$lib/stores/user'
+  import { onMount } from 'svelte'
 
-	let email: string = '';
-	let password: string = '';
+  let auth0Client
 
-	async function loginWithMail() {
-		await signInWithEmailAndPassword(auth, email, password)
-			.then((result) => {
-				const { user }: UserCredential = result;
-				session.set({
-					loggedIn: true,
-					user: {
-						displayName: user?.displayName,
-						email: user?.email,
-						photoURL: user?.photoURL,
-						uid: user?.uid
-					}
-				});
-				goto('/');
-			})
-			.catch((error) => {
-				return error;
-			});
-	}
+  onMount(async () => {
+    auth0Client = await auth.createClient()
+    isAuthenticated.set(await auth0Client.isAuthenticated())
+    user.set(await auth0Client.getUser())
+  })
 
-	async function loginWithGoogle() {
-		const provider = new GoogleAuthProvider();
-		await signInWithPopup(auth, provider)
-			.then((result) => {
-				const { displayName, email, photoURL, uid } = result?.user;
-				session.set({
-					loggedIn: true,
-					user: {
-						displayName,
-						email,
-						photoURL,
-						uid
-					}
-				});
+  function login() {
+    auth.loginWithPopup(auth0Client)
+  }
 
-				goto('/');
-			})
-			.catch((error) => {
-				return error;
-			});
-	}
+  function logout() {
+    auth.logout(auth0Client)
+  }
 </script>
 
 <div class="login-form">
-	<h1>Login</h1>
-	<form on:submit={loginWithMail}>
-		<input bind:value={email} type="text" placeholder="Email" />
-		<input bind:value={password} type="password" placeholder="Password" />
-		<button type="submit">Login</button>
-	</form>
-
-	<div>or</div>
-
-	<button on:click={loginWithGoogle}>Login with Google</button>
-	<div>Don't you have an account? <a href="/register"> Register</a></div>
+	{#if $isAuthenticated}
+	<h2>Hey {$user.name}!</h2>
+	{#if $user.picture}
+	  <img src={$user.picture} alt={user.name} />
+	{:else}
+	  <img
+		src="https://source.unsplash.com/random/400x300"
+		alt="Random from unsplash"
+	  />
+	{/if}
+	<button on:click={logout}>Logout</button>
+  {:else}
+	<button on:click={login}>Login</button>
+  {/if}
 </div>
