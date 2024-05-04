@@ -1,6 +1,7 @@
 import { c as create_ssr_component, e as escape } from "../../chunks/ssr.js";
-import { s as session } from "../../chunks/session.js";
+import { w as writable } from "../../chunks/index.js";
 import "../../chunks/client.js";
+const session = writable();
 const Layout = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { data } = $$props;
   let loading = true;
