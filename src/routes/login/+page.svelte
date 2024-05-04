@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { session } from '$lib/stores/session';
+	import { t } from '$lib/stores/locales';
 	import { auth } from '$lib/firebase.client';
 	import {
 		GoogleAuthProvider,
@@ -56,15 +57,15 @@
 </script>
 
 <div class="login-form">
-	<h1>Login</h1>
+	<h1>{@html $t('login')}</h1>
 	<form on:submit={loginWithMail}>
 		<input bind:value={email} type="text" placeholder="Email" />
 		<input bind:value={password} type="password" placeholder="Password" />
-		<button type="submit">Login</button>
+		<button type="submit">{@html $t('login')}</button>
+		<div>{@html $t('donthaveAccount')}<a href="/register">{@html $t('register')}</a></div>
 	</form>
 
 	<div>or</div>
 
-	<button on:click={loginWithGoogle}>Login with Google</button>
-	<div>Don't you have an account? <a href="/register"> Register</a></div>
+	<button on:click={loginWithGoogle}>{@html $t('loginWithGoogle')}</button>
 </div>

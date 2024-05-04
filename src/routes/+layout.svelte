@@ -72,7 +72,6 @@
  <div>Loading...</div>
 {:else}
   <div>
-   Logged in: {loggedIn}
-   <slot />
+   <slot loggedIn={loggedIn} />
   </div>
 {/if}

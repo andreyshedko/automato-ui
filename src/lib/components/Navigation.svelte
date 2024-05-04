@@ -1,3 +1,9 @@
+<script lang="ts">
+	import { t } from '$lib/stores/locales';
+	export let loggedIn: boolean;
+	console.log(loggedIn)
+</script>
+
 <nav class="navbar" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="/">
@@ -25,7 +31,7 @@
 		<div class="navbar-end">
 			<div class="navbar-item">
 				<div class="buttons">
-					<a class="button is-light" href="/login">Log in</a>
+					<a class="button is-light" href="/login">{@html $t('login')}</a>
 				</div>
 			</div>
 		</div>

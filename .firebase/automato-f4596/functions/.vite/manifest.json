@@ -33,13 +33,6 @@
       "_ssr.js"
     ]
   },
-  "_session.js": {
-    "file": "chunks/session.js",
-    "name": "session",
-    "imports": [
-      "_index.js"
-    ]
-  },
   "_ssr.js": {
     "file": "chunks/ssr.js",
     "name": "ssr"
@@ -72,7 +65,7 @@
     "isEntry": true,
     "imports": [
       "_ssr.js",
-      "_session.js",
+      "_index.js",
       "_client.js"
     ],
     "css": [
@@ -91,8 +84,7 @@
     "src": "src/routes/+page.svelte",
     "isEntry": true,
     "imports": [
-      "_ssr.js",
-      "_session.js"
+      "_ssr.js"
     ]
   },
   "src/routes/cabinet/+page.svelte": {
