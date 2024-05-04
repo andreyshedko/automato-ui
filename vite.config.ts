@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import fs from 'fs';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
     https: {
