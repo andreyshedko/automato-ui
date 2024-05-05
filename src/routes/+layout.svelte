@@ -4,20 +4,24 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import auth from '$lib/auth0/auth0';
 	import { onMount } from 'svelte';
+	import type { Auth0Client } from '@auth0/auth0-spa-js';
 
-	// var userLang = navigator.language || navigator.userLanguage; 
+	// var userLang = navigator.language || navigator.userLanguage;
 	// console.log(userLang)
 
-	let auth0Client;
+	let auth0Client: Auth0Client;
 
 	onMount(async () => {
 		auth0Client = await auth.createClient();
-		isAuthenticated.set(await auth0Client.isAuthenticated());
-		user.set(await auth0Client.getUser());
+		let _isAuthenticated = await auth0Client.isAuthenticated();
+		isAuthenticated.set(_isAuthenticated);
+		
+		let _user = await auth0Client.getUser();
+		user.set(_user);
 	});
 
 	function login() {
-		auth.loginWithPopup(auth0Client);
+		auth.loginWithPopup(auth0Client, undefined);
 	}
 
 	function logout() {
@@ -28,5 +32,5 @@
 <Navigation on:login={login} on:logout={logout} />
 
 {#if $isAuthenticated}
-	<slot {user} />
+	<slot />
 {/if}

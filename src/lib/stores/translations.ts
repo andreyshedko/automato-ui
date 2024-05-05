@@ -10,7 +10,11 @@ export const translations = {
         "dashboard": "Dashboard",
         "howItWorks": "How it works",
         "prices": "Prices",
-        "support": "Support"
+        "support": "Support",
+        "activities": "Activities",
+        "mySites": "My Sites",
+        "settings": "Settings",
+        "account": "Account"
     },
     "cz": {
         "login": "Přihlášení",
@@ -23,6 +27,10 @@ export const translations = {
         "dashboard": "Panel",
         "howItWorks": "Jak to funguje",
         "prices": "Ceny",
-        "support": "Podpora"
+        "support": "Podpora",
+        "activities": "Aktivity",
+        "mySites": "Moje weby",
+        "settings": "Nastavení",
+        "account": "Účet"
     },
 };
