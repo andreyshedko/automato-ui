@@ -1,4 +1,4 @@
-import { isAuthenticated, popupOpen, user } from '$lib/stores/user';
+import { isAuthenticated, popupOpen, user } from '../stores/user';
 import  { createAuth0Client } from '@auth0/auth0-spa-js'
 import config from './config'
 
