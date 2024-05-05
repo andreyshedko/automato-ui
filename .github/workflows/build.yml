@@ -19,7 +19,7 @@ jobs:
           uses: sonarsource/sonarcloud-github-action@master
           with:
               args: >
-                 -Dsonar.organization=Andrey Shedko
+                 -Dsonar.organization=andreyshedko
                  -Dsonar.projectKey=andreyshedko_automato-ui
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
