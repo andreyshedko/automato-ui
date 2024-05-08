@@ -14,7 +14,7 @@
 	};
 </script>
 
-<nav class="navbar" aria-label="main navigation">
+<nav class="navbar is-fixed-top is-transparent" aria-label="main navigation" style="z-index: 101; opacity: 0.8">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="/">
 			<img src="./roboto.svg" />
@@ -66,7 +66,7 @@
 						<button class="button is-light" on:click={login}>{@html $t('login')}</button>
 					{:else}
 						<button class="button is-light" on:click={logout}>{@html $t('logout')}</button>
-						<a class="button" role="button" href="/dashboard">{@html $t('dashboard')}</a>
+						<a class="button" role="button" href="/dashboard/home">{@html $t('dashboard')}</a>
 					{/if}
 				</div>
 			</div>
