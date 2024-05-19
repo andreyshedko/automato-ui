@@ -1,5 +1,10 @@
 {
 	"/": [],
 	"/dashboard": [],
+	"/dashboard/home": [],
+	"/dashboard/settings": [],
+	"/dashboard/settings/country": [
+		"src/routes/dashboard/settings/country/+page.ts"
+	],
 	"/[...path]": []
 }

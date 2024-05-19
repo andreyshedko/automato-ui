@@ -1,13 +1,11 @@
 <script lang="ts">
 	import '../app.scss';
-	import { isAuthenticated, user } from '$lib/stores/user';
+	import { isAuthenticated, user, userCoordinates, userLocale } from '$lib/stores/user';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import auth from '$lib/auth0/auth0';
 	import { onMount } from 'svelte';
 	import type { Auth0Client } from '@auth0/auth0-spa-js';
-
-	// var userLang = navigator.language || navigator.userLanguage;
-	// console.log(userLang)
+	import { getUserLocaleAndLocation } from '$lib/services/user.data';
 
 	let auth0Client: Auth0Client;
 
@@ -15,9 +13,14 @@
 		auth0Client = await auth.createClient();
 		let _isAuthenticated = await auth0Client.isAuthenticated();
 		isAuthenticated.set(_isAuthenticated);
-		
+
 		let _user = await auth0Client.getUser();
 		user.set(_user);
+
+		getUserLocaleAndLocation(window.navigator).then((value: UserSettings) => {
+			userLocale.set(value.locale);
+			userCoordinates.set(value.location);
+		});
 	});
 
 	function login() {

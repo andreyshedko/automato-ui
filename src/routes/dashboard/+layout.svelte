@@ -2,6 +2,7 @@
 	import './dashboard.scss';
 	import { isAuthenticated } from '$lib/stores/user';
 	import { t } from '$lib/stores/locales';
+	import { onMount } from 'svelte';
 
 	let _isAuthenticated: boolean;
 	isAuthenticated.subscribe((value) => (_isAuthenticated = value));
@@ -9,6 +10,11 @@
 	let sideBar: HTMLDivElement;
 	let arrowCollapse: HTMLDivElement;
 	let icon: HTMLElement;
+
+	onMount(() => {
+		sideBar?.classList.add('collapse');
+		arrowCollapse?.classList.add('collapse');
+	});
 
 	const toggle = (): void => {
 		sideBar.classList.toggle('collapse');
@@ -28,14 +34,14 @@
 	<div
 		class="side-bar has-background-info-light"
 		bind:this={sideBar}
-		on:click={toggle}
-		on:keydown={toggle}
 		aria-roledescription="sidebar"
 	>
 		<div
 			class="is-flex is-flex-direction-row-reverse"
 			bind:this={arrowCollapse}
 			aria-roledescription="sidebar icon"
+			on:click={toggle}
+			on:keydown={toggle}
 		>
 			<i class="logo-name__icon gg-arrow-left-o mt-4" id="logo-name__icon" bind:this={icon}></i>
 		</div>
