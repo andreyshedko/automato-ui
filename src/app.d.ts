@@ -10,3 +10,7 @@ export interface User {
     sub: string;
     updated_at: Date
 }
+
+export type UserSettings = { locale: string; location: GeolocationCoordinates };
+
+export type KeyValue = {key: string, value: unknown};

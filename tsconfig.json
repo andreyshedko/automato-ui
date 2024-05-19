@@ -12,7 +12,7 @@
 		"strict": true,
 		"moduleResolution": "bundler"
 	},
-	"include": ["src/vite-env.d.ts"]
+	"include": ["src/vite-env.d.ts", "src/app.d.ts"]
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
 	// except $lib which is handled by https://kit.svelte.dev/docs/configuration#files
 	//

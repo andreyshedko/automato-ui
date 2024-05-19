@@ -30,7 +30,12 @@ export const translations = {
         "cookies": "Cookies",
         "cookiesText": `Setup cookies files.`,
         "comm": "Communication",
-        "commText": `Setup customers communication channels.`
+        "commText": `Setup customers communication channels.`,
+        "yourCountryIs": "We identify your country as : ",
+        "noCountry": "Please select your country",
+        "save": "Save",
+        "cancel": "Cancel",
+        "countriesList": "Countries List"
     },
     "cz": {
         "login": "Přihlášení",
@@ -63,6 +68,11 @@ export const translations = {
         "cookies": "Cookies",
         "cookiesText": `Nastavení souborů cookie.`,
         "comm": "Komunikace",
-        "commText": `Nastavení komunikačních kanálů pro zákazníky.`
+        "commText": `Nastavení komunikačních kanálů pro zákazníky.`,
+        "yourCountryIs": "Vaši zemi definujeme jako: ",
+        "noCountry": "Vyberte prosím svou zemi",
+        "save": "Uložit",
+        "cancel": "Zrušit",
+        "countriesList": "Seznam zemí"
     },
 };
