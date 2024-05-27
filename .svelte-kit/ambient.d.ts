@@ -46,7 +46,7 @@ declare module '$env/static/private' {
 	export const COREPACK_ROOT: string;
 	export const CURL_CA_BUNDLE: string;
 	export const DriverData: string;
-	export const EFC_11232: string;
+	export const EFC_3176: string;
 	export const FPS_BROWSER_APP_PROFILE_STRING: string;
 	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GDAL_DATA: string;
@@ -132,6 +132,7 @@ declare module '$env/static/private' {
 	export const PATHEXT: string;
 	export const POSTGIS_ENABLE_OUTDB_RASTERS: string;
 	export const POSTGIS_GDAL_ENABLED_DRIVERS: string;
+	export const PQ_LIB_DIR: string;
 	export const PROCESSOR_ARCHITECTURE: string;
 	export const PROCESSOR_IDENTIFIER: string;
 	export const PROCESSOR_LEVEL: string;
@@ -212,7 +213,7 @@ declare module '$env/dynamic/private' {
 		COREPACK_ROOT: string;
 		CURL_CA_BUNDLE: string;
 		DriverData: string;
-		EFC_11232: string;
+		EFC_3176: string;
 		FPS_BROWSER_APP_PROFILE_STRING: string;
 		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GDAL_DATA: string;
@@ -298,6 +299,7 @@ declare module '$env/dynamic/private' {
 		PATHEXT: string;
 		POSTGIS_ENABLE_OUTDB_RASTERS: string;
 		POSTGIS_GDAL_ENABLED_DRIVERS: string;
+		PQ_LIB_DIR: string;
 		PROCESSOR_ARCHITECTURE: string;
 		PROCESSOR_IDENTIFIER: string;
 		PROCESSOR_LEVEL: string;

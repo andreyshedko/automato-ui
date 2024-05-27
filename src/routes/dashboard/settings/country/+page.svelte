@@ -10,8 +10,13 @@
 	let list: string;
 	let showModal = false;
 
+	const setCountry = (country: CustomEvent<any>) => {
+		const { value } = country.detail;
+		country = value;
+	};
+
 	const saveCountry = () => {
-		console.log(country);
+		
 	};
 
 	let saveText = $t('save');
@@ -37,7 +42,7 @@
 			{#if country}
 				<h1>{country}</h1>
 			{:else}
-				<CountryList />
+				<CountryList on:countrySelected={(event) => setCountry(event)} />
 			{/if}
 		</p>
 		<span slot="modalFooter">

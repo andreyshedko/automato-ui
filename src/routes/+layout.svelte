@@ -6,6 +6,8 @@
 	import { onMount } from 'svelte';
 	import type { Auth0Client } from '@auth0/auth0-spa-js';
 	import { getUserLocaleAndLocation } from '$lib/services/user.data';
+	import { saveUser } from '$lib/services/user.service';
+	import type { UserSettings } from '../app';
 
 	let auth0Client: Auth0Client;
 
@@ -14,8 +16,11 @@
 		let _isAuthenticated = await auth0Client.isAuthenticated();
 		isAuthenticated.set(_isAuthenticated);
 
-		let _user = await auth0Client.getUser();
-		user.set(_user);
+		user.subscribe((user) => {
+			if (user) {
+				saveUser(user, `${import.meta.env.VITE_API_PATH}`);
+			}
+		});
 
 		getUserLocaleAndLocation(window.navigator).then((value: UserSettings) => {
 			userLocale.set(value.locale);

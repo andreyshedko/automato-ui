@@ -2,11 +2,13 @@
 	import Select from '../../../node_modules/automato-components/dist/select/Select.svelte';
 
 	import { userLocale } from '$lib/stores/user';
-	import { onDestroy } from 'svelte';
+	import { saveCountry } from "$lib/services/country.service";
+	import { createEventDispatcher, onDestroy } from 'svelte';
 	import type { KeyValue } from '../../app';
 
 	let countries: KeyValue[] = [];
 	type CountriesList = { id: string; alpha2: string; alpha3: string; name: string };
+	const dispatch = createEventDispatcher()
 
 	const callCountriesList = (_locale: string) => {
 		let locale = _locale ?? 'en';
@@ -14,7 +16,7 @@
 			if (response.ok) {
 				let resp: CountriesList[] = await response.json();
 				countries = resp.map((item) => {
-					return { key: item.id, value: item.name };
+					return { key: item.id, value: item.name } as KeyValue;
 				});
 			}
 		});
@@ -22,8 +24,8 @@
 
 	const destroy = userLocale.subscribe((_locale) => callCountriesList(_locale));
 
-    const dispatchCountry = (value) => {
-        console.log(value.detail)
+    const dispatchCountry = (value: CustomEvent<any>): void => {
+       dispatch("countrySelected", value.detail);
     }
 
 	onDestroy(() => destroy());
