@@ -5,9 +5,14 @@
 	import auth from '$lib/auth0/auth0';
 	import { onMount } from 'svelte';
 	import type { Auth0Client } from '@auth0/auth0-spa-js';
-	import { getUserLocaleAndLocation } from '$lib/services/user.data';
-	import { saveUser } from '$lib/services/user.service';
-	import type { UserSettings } from '../app';
+	import {
+		saveUser,
+		userId,
+		getUserByEmail,
+		getUserLocaleAndLocation,
+		type UserSettings
+	} from '$lib/stores/user';
+	import { storable } from '$lib/stores/storable';
 
 	let auth0Client: Auth0Client;
 
@@ -16,9 +21,12 @@
 		let _isAuthenticated = await auth0Client.isAuthenticated();
 		isAuthenticated.set(_isAuthenticated);
 
-		user.subscribe((user) => {
+		user.subscribe(async (user) => {
 			if (user) {
-				saveUser(user, `${import.meta.env.VITE_API_PATH}`);
+				saveUser(user);
+				const _user = await getUserByEmail(user.email!);
+				userId.set(_user.id as number);
+				storable(_user.id).set(_user.id);
 			}
 		});
 
