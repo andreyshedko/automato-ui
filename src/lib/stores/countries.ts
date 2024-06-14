@@ -8,7 +8,7 @@ export const countryList = writable<string[]>([]);
 export const saveCountry = async (
 	country_name: string,
 	user_id: number
-): Promise<number> => {
+): Promise<Response> => {
 	const response = await fetch(`${import.meta.env.VITE_API_PATH}/user/country`, {
 		method: 'POST',
 		headers: {
@@ -21,15 +21,15 @@ export const saveCountry = async (
 		})
 	});
 
-	return response.status;
+	return response;
 };
 
 export const updateCountry = async (
 	country_name: string,
 	user_id: number
-): Promise<number> => {
+): Promise<Response> => {
 	const response = await fetch(`${import.meta.env.VITE_API_PATH}/user/country`, {
-		method: 'POST',
+		method: 'PATCH',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
@@ -40,26 +40,24 @@ export const updateCountry = async (
 		})
 	});
 
-	return response.status;
+	return response;
 };
 
 export const deleteCountry = async (
-	country_name: string,
 	user_id: number
-): Promise<number> => {
-	const response = await fetch(`${import.meta.env.VITE_API_PATH}/user/country`, {
-		method: 'POST',
+): Promise<Response> => {
+	const response = await fetch(`${import.meta.env.VITE_API_PATH}/user/${user_id}/country`, {
+		method: 'DELETE',
 		headers: {
 			Accept: 'application/json',
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
 			user_id,
-			country_name
 		})
 	});
 
-	return response.status;
+	return response;
 };
 
 export const fetchCountries = async (locale: string) => {

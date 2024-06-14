@@ -44,8 +44,10 @@ declare module '$env/static/private' {
 	export const CURL_CA_BUNDLE: string;
 	export const DISPLAY: string;
 	export const DriverData: string;
-	export const EFC_6984: string;
+	export const EFC_11756: string;
 	export const EXEPATH: string;
+	export const FPS_BROWSER_APP_PROFILE_STRING: string;
+	export const FPS_BROWSER_USER_PROFILE_STRING: string;
 	export const GDAL_DATA: string;
 	export const GIT_ASKPASS: string;
 	export const HOME: string;
@@ -183,7 +185,6 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_IPC_HANDLE: string;
 	export const WINDIR: string;
 	export const YARN_WRAP_OUTPUT: string;
-	export const __COMPAT_LAYER: string;
 }
 
 /**
@@ -233,8 +234,10 @@ declare module '$env/dynamic/private' {
 		CURL_CA_BUNDLE: string;
 		DISPLAY: string;
 		DriverData: string;
-		EFC_6984: string;
+		EFC_11756: string;
 		EXEPATH: string;
+		FPS_BROWSER_APP_PROFILE_STRING: string;
+		FPS_BROWSER_USER_PROFILE_STRING: string;
 		GDAL_DATA: string;
 		GIT_ASKPASS: string;
 		HOME: string;
@@ -372,7 +375,6 @@ declare module '$env/dynamic/private' {
 		VSCODE_GIT_IPC_HANDLE: string;
 		WINDIR: string;
 		YARN_WRAP_OUTPUT: string;
-		__COMPAT_LAYER: string;
 		[key: `PUBLIC_${string}`]: undefined;
 		[key: `${string}`]: string | undefined;
 	}

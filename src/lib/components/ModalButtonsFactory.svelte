@@ -15,7 +15,7 @@
 	let deleteText = $t('delete');
 </script>
 
-{#if (state = 'CREATE')}
+{#if (state === 'CREATE')}
 	<Button
 		primary={true}
 		size="medium"
@@ -31,7 +31,7 @@
 		clickCallback={showModal}
 		keydownCallback={showModal}
 	/>
-{:else if (state = 'UPDATE')}
+{:else if (state === 'UPDATE')}
 	<Button
 		primary={true}
 		size="medium"
@@ -47,7 +47,7 @@
 		clickCallback={showModal}
 		keydownCallback={showModal}
 	/>
-{:else if (state = 'DELETE')}
+{:else if (state === 'DELETE')}
 	<Button
 		primary={true}
 		size="medium"

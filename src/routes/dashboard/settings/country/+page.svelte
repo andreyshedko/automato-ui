@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ConfirmCountrySelectionModal from '$lib/components/ConfirmCountrySelectionModal.svelte';
-	import CountryList from '$lib/components/CountryList.svelte';
 	import { deleteCountry, saveCountry, updateCountry } from '$lib/stores/countries';
 	import { getCountryByUserId } from '$lib/stores/user';
 	import type { PageData } from './$types';
@@ -11,6 +10,7 @@
 	import { storable } from '$lib/stores/storable';
 	import ModalBodyFactory from '$lib/components/ModalBodyFactory.svelte';
 	import ModalButtonsFactory from '$lib/components/ModalButtonsFactory.svelte';
+	import { addToast } from '$lib/stores/toast';
 
 	let country: string;
 	let countryText: string;
@@ -19,7 +19,7 @@
 	let showModal = false;
 	let _userId: number;
 	let lsUnsub: Unsubscriber;
-	let state: 'CREATE' | 'UPDATE' | 'DELETE';
+	let state: 'CREATE' | 'UPDATE' | 'DELETE' = 'CREATE';
 
 	let editText = $t('edit');
 	let deleteText = $t('delete');
@@ -46,18 +46,43 @@
 
 	const setCountry = (event: CustomEvent<any>) => {
 		selectedCountry = event.detail;
+		isDisabled();
 	};
 
-	const saveUserCountry = (): void => {
-		saveCountry(country, _userId);
+	const saveUserCountry = async (): Promise<void> => {
+		const response = await saveCountry(selectedCountry, _userId);
+		if (response.status === 200) {
+			country = (await response.json()).country_name;
+		}
+		_showModal();
 	};
 
-	const updateUserCountry = (): void => {
-		updateCountry(country, _userId);
+	const updateUserCountry = async (): Promise<void> => {
+		const response = await updateCountry(selectedCountry, _userId);
+		if (response.status === 200) {
+			country = (await response.json()).country_name;
+		}
+		_showModal();
+		// addToast({
+		// 	message: status === 200 ? 'Country saved' : 'Error saving country',
+		// 	type: status === 200 ? 'success' : 'warning',
+		// 	dismissible: true,
+		// 	timeout: 3000
+		// });
 	};
 
-	const deleteUserCountry = (): void => {
-		deleteCountry(country, _userId);
+	const deleteUserCountry = async (): Promise<void> => {
+		const response = await deleteCountry(_userId);
+		if (response.status === 200) {
+			country = '';
+		}
+		_showModal();
+		// addToast({
+		// 	message: status === 200 ? 'Country saved' : 'Error saving country',
+		// 	type: status === 200 ? 'success' : 'warning',
+		// 	dismissible: true,
+		// 	timeout: 3000
+		// });
 	};
 
 	export let data: PageData;
@@ -71,13 +96,17 @@
 		countryText = $t('noCountry');
 		list = $t('countriesList');
 	}
+
+	const isDisabled = (): boolean => {
+		return state === 'CREATE' && !selectedCountry;
+	};
 </script>
 
 <div class="dashboard-container">
 	<ConfirmCountrySelectionModal {showModal}>
 		<h1 slot="modalHeader">{countryText}</h1>
 		<p slot="modalBody">
-			<ModalBodyFactory selectedCountry={selectedCountry ?? country} bind:state={state} {setCountry} />
+			<ModalBodyFactory selectedCountry={selectedCountry ?? country} {state} {setCountry} />
 		</p>
 		<span slot="modalFooter">
 			<ModalButtonsFactory
@@ -86,11 +115,11 @@
 				create={saveUserCountry}
 				edit={updateUserCountry}
 				deleteAction={deleteUserCountry}
-				disabled={!country}
+				disabled={false}
 			/>
 		</span>
 	</ConfirmCountrySelectionModal>
-	<div class="fixed-grid has-auto-count">
+	<div class="fixed-grid has-10-cols">
 		<div class="grid">
 			<div class="cell">
 				<h1>
@@ -103,18 +132,27 @@
 			</div>
 			<div class="cell">
 				{#if !showModal && !country}
-					<Button label={list} clickCallback={_showModal} keydownCallback={_showModal} />
+					<Button
+						label={list}
+						clickCallback={() => setState('CREATE')}
+						keydownCallback={() => setState('CREATE')}
+					/>
 				{/if}
-
+			</div>
+			<div class="cell">
 				<Button
 					label={editText}
 					clickCallback={() => setState('UPDATE')}
 					keydownCallback={() => setState('UPDATE')}
+					disabled={!country}
 				/>
+			</div>
+			<div class="cell">
 				<Button
 					label={deleteText}
 					clickCallback={() => setState('DELETE')}
 					keydownCallback={() => setState('DELETE')}
+					disabled={!country}
 				/>
 			</div>
 		</div>
