@@ -35,7 +35,10 @@ export const translations = {
         "noCountry": "Please select your country",
         "save": "Save",
         "cancel": "Cancel",
-        "countriesList": "Countries List"
+        "countriesList": "Countries List",
+        "edit": "Edit",
+        "delete": "Delete"
+
     },
     "cz": {
         "login": "Přihlášení",
@@ -73,6 +76,8 @@ export const translations = {
         "noCountry": "Vyberte prosím svou zemi",
         "save": "Uložit",
         "cancel": "Zrušit",
-        "countriesList": "Seznam zemí"
+        "countriesList": "Seznam zemí",
+        "edit": "Upravit",
+        "delete": "Smazat"
     },
 };

@@ -1,32 +1,38 @@
 <script lang="ts">
-	import Select from '../../../node_modules/automato-components/dist/select/Select.svelte';
 
 	import { userLocale } from '$lib/stores/user';
-	import { onDestroy } from 'svelte';
-	import type { KeyValue } from '../../app';
+	import { countryList } from '$lib/stores/countries';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+	import { fetchCountries } from '$lib/stores/countries';
+	import Select from '../../../../automato-components/dist/select/Select.svelte';
 
-	let countries: KeyValue[] = [];
-	type CountriesList = { id: string; alpha2: string; alpha3: string; name: string };
+	export let selectedCountry: string;
 
-	const callCountriesList = (_locale: string) => {
-		let locale = _locale ?? 'en';
-		fetch(`${import.meta.env.VITE_API_PATH}/countries/${locale}`).then(async (response) => {
-			if (response.ok) {
-				let resp: CountriesList[] = await response.json();
-				countries = resp.map((item) => {
-					return { key: item.id, value: item.name };
-				});
-			}
-		});
+	let countries: string[] = [];
+	let locale: string;
+
+	const dispatch = createEventDispatcher();
+	
+	let userlocaleUnsub = userLocale.subscribe((_locale) => locale = _locale);
+	let countryListUnsub = countryList.subscribe(list => countries = list);
+
+	onMount(async () => {
+		await fetchCountries(locale ?? 'en');
+	})
+
+	onDestroy(() => {
+		countryListUnsub();
+		userlocaleUnsub();
+	});
+
+	const dispatchCountry = (value: CustomEvent<any>): void => {
+		dispatch('countrySelected', value.detail);
 	};
-
-	const destroy = userLocale.subscribe((_locale) => callCountriesList(_locale));
-
-    const dispatchCountry = (value) => {
-        console.log(value.detail)
-    }
-
-	onDestroy(() => destroy());
 </script>
 
-<Select id={'countries'} items={countries} on:change={(value) => dispatchCountry(value)} />
+<Select
+	id={'countries'}
+	items={countries}
+	on:change={(value) => dispatchCountry(value)}
+	selectedValue={selectedCountry}
+/>

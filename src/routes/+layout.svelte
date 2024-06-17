@@ -5,7 +5,14 @@
 	import auth from '$lib/auth0/auth0';
 	import { onMount } from 'svelte';
 	import type { Auth0Client } from '@auth0/auth0-spa-js';
-	import { getUserLocaleAndLocation } from '$lib/services/user.data';
+	import {
+		saveUser,
+		userId,
+		getUserByEmail,
+		getUserLocaleAndLocation,
+		type UserSettings
+	} from '$lib/stores/user';
+	import { storable } from '$lib/stores/storable';
 
 	let auth0Client: Auth0Client;
 
@@ -14,8 +21,14 @@
 		let _isAuthenticated = await auth0Client.isAuthenticated();
 		isAuthenticated.set(_isAuthenticated);
 
-		let _user = await auth0Client.getUser();
-		user.set(_user);
+		user.subscribe(async (user) => {
+			if (user) {
+				saveUser(user);
+				const _user = await getUserByEmail(user.email!);
+				userId.set(_user.id as number);
+				storable(_user.id).set(_user.id);
+			}
+		});
 
 		getUserLocaleAndLocation(window.navigator).then((value: UserSettings) => {
 			userLocale.set(value.locale);

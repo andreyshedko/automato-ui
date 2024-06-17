@@ -1,7 +1,7 @@
 import { derived, writable, type Writable } from 'svelte/store';
 import { translations } from "./translations";
 
-const locale: Writable<string> = writable("cz");
+export const locale: Writable<string> = writable("cz");
 
 export const unsusbcribe = locale;
 export const locales = Object.keys(translations);
