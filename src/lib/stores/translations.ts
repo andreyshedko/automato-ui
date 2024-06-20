@@ -37,7 +37,12 @@ export const translations = {
         "cancel": "Cancel",
         "countriesList": "Countries List",
         "edit": "Edit",
-        "delete": "Delete"
+        "delete": "Delete",
+        "siteLanguage": "Site Language",
+        "accountLanguage": "Account Language",
+        "timezone": "Time Zone",
+        "locale": "Locale",
+        "currency": "Currency"
 
     },
     "cz": {
@@ -78,6 +83,11 @@ export const translations = {
         "cancel": "Zrušit",
         "countriesList": "Seznam zemí",
         "edit": "Upravit",
-        "delete": "Smazat"
+        "delete": "Smazat",
+        "siteLanguage": "Jazyk webu",
+        "accountLanguage": "Jazyk účtu",
+        "locale": "Lokalita",
+        "currency": "Měna",
+        "timezone": "Časová zóna",
     },
 };

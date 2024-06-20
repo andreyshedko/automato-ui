@@ -10,3 +10,12 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv
 }
+
+export interface $$UserRegionalSettings {
+	userId: number;
+	site_language: string;
+	account_language: string;
+	currency: string;
+	locale: string;
+	apply_tol_all_sites: boolean;
+} 

@@ -95,3 +95,16 @@ export const retrieveLocationFromExternalProvider = async (path: string, coordin
     
     return response.json();
 }
+
+export const set_site_language = (language: string) => {
+    // const response  = await fetch(`${import.meta.env.VITE_API_PATH}/user/country`, {
+	// 	method: 'POST',
+    //     headers: {
+    //         'Accept': 'application/json',
+    //         'Content-Type': 'application/json'
+    //       },
+	// 	body: JSON.stringify({ userId, name: country })
+	// });
+
+    // return response.status;
+}

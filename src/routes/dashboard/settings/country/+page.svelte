@@ -10,7 +10,6 @@
 	import { storable } from '$lib/stores/storable';
 	import ModalBodyFactory from '$lib/components/ModalBodyFactory.svelte';
 	import ModalButtonsFactory from '$lib/components/ModalButtonsFactory.svelte';
-	import { addToast } from '$lib/stores/toast';
 
 	let country: string;
 	let countryText: string;
@@ -63,12 +62,6 @@
 			country = (await response.json()).country_name;
 		}
 		_showModal();
-		// addToast({
-		// 	message: status === 200 ? 'Country saved' : 'Error saving country',
-		// 	type: status === 200 ? 'success' : 'warning',
-		// 	dismissible: true,
-		// 	timeout: 3000
-		// });
 	};
 
 	const deleteUserCountry = async (): Promise<void> => {
@@ -77,12 +70,6 @@
 			country = '';
 		}
 		_showModal();
-		// addToast({
-		// 	message: status === 200 ? 'Country saved' : 'Error saving country',
-		// 	type: status === 200 ? 'success' : 'warning',
-		// 	dismissible: true,
-		// 	timeout: 3000
-		// });
 	};
 
 	export let data: PageData;
@@ -119,6 +106,7 @@
 			/>
 		</span>
 	</ConfirmCountrySelectionModal>
+	<h6 class="title is-6 mx-2">{@html $t('country')}</h6>
 	<div class="fixed-grid has-10-cols">
 		<div class="grid">
 			<div class="cell">

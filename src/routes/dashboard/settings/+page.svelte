@@ -25,7 +25,7 @@
 			</div>
 			<div class="cell">
 				<div class="box">
-					<article class="is-flex-direction-column">
+					<a class="is-flex-direction-column" href="settings/region">
 						<div class="is-flex is-flex-direction-row is-align-items-center">
 							<i class="gg-globe"></i>
 							<h6 class="title is-6 mx-2">{@html $t('region')}</h6>
@@ -37,7 +37,7 @@
 								</p>
 							</div>
 						</div>
-					</article>
+					</a>
 				</div>
 			</div>
 			<div class="cell">

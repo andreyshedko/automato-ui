@@ -6,5 +6,6 @@
 	"/dashboard/settings/country": [
 		"src/routes/dashboard/settings/country/+page.ts"
 	],
+	"/dashboard/settings/region": [],
 	"/[...path]": []
 }
