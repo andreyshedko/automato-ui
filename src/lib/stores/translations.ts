@@ -39,10 +39,15 @@ export const translations = {
         "edit": "Edit",
         "delete": "Delete",
         "siteLanguage": "Site Language",
+        "siteLanguageLong": "Select the default language for the site, email messages, and notifications that users see.",
         "accountLanguage": "Account Language",
         "timezone": "Time Zone",
+        "timezoneLong": "Select a time zone so users can see your date and time.",
         "locale": "Locale",
-        "currency": "Currency"
+        "localeLong": "Select a region to set the order in which dates, numbers, and units are displayed on the site.",
+        "currency": "Currency",
+        "currencyLong": "Select the currency in which you want to accept payments and which will be displayed on the site.",
+        "applyToAll": "Apply to all sites"
 
     },
     "cz": {
@@ -85,9 +90,14 @@ export const translations = {
         "edit": "Upravit",
         "delete": "Smazat",
         "siteLanguage": "Jazyk webu",
+        "siteLanguageLong": "Vyberte výchozí jazyk webu, e-mailových zpráv a oznámení, které uživatelé uvidí.",
         "accountLanguage": "Jazyk účtu",
         "locale": "Lokalita",
+        "localeLong": "Vyberte oblast a nastavte pořadí, v jakém se na webu zobrazují data, čísla a jednotky.",
         "currency": "Měna",
+        "currencyLong": "Vyberte měnu, ve které chcete přijímat platby a která se bude zobrazovat na webu.",
         "timezone": "Časová zóna",
+        "timezoneLong": "Vyberte časové pásmo, aby uživatelé viděli vaše datum a čas.",
+        "applyToAll": "Platí pro všechny stránky"
     },
 };

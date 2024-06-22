@@ -22,11 +22,11 @@ export interface Language {
 }
 
 export interface UserRegionalSettings {
-	userId: number;
+	user_id: number;
 	site_language: string;
 	account_language: string;
 	currency: string;
-	locale: string;
-	timezone: string;
-	apply_tol_all_sites: boolean;
+	regional_settings: string;
+	time_zone: string;
+	apply_to_all_sites: boolean;
 } 
